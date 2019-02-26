@@ -9,6 +9,7 @@ RUN apk add --virtual .build-deps gcc python-dev musl-dev postgresql-dev
 
 RUN apk -U add \
         gcc \
+        libgcc \
         libffi-dev \
         libxml2-dev \
         libxslt-dev \
@@ -22,9 +23,16 @@ RUN apk -U add \
     && rm -rf /var/cache/apk/* \
     && pip install --upgrade pip \
     && pip install Scrapy
+RUN apk add jpeg-dev zlib-dev freetype-dev lcms2-dev openjpeg-dev tiff-dev tk-dev tcl-dev
+RUN apk add gcc gfortran python python-dev py-pip build-base wget freetype-dev libpng-dev openblas-dev 
 
+RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
 
-# Installing and build python module
+# Data analysis libs
+RUN pip install numpy 
+RUN pip install scikit-learn pandas matplotlib wordcloud 
+
+# Connect to postgresql
 RUN pip install psycopg2
 
 # Delete build dependencies
