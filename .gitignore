@@ -3,3 +3,5 @@
 postgres/**
 # Ignore the environment variables.
 env/**
+
+*.pyc 
